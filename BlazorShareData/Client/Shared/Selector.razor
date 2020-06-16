@@ -1,0 +1,26 @@
+﻿@inject HttpClient Client
+<select @onchange="SharedData.Select">
+    @foreach (var option in _options)
+    {
+        <option value="@option">@option</option>
+    }
+</select>
+
+@code{
+    private string[] _options = Array.Empty<string>();
+
+    [CascadingParameter] public SharedData SharedData { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Here just to prove we can retrieve protected data successfully;
+        await Client.GetAsync("fetchdata");
+        _options = new string[]
+        {
+            "Spain",
+            "France",
+            "Italy",
+            "England"
+        };
+    }
+}

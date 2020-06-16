@@ -1,0 +1,12 @@
+﻿@page "/displaydata"
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
+
+<h3>DisplayData</h3>
+@foreach (var value in SharedData.Data)
+{
+    <p>@value</p>
+}
+@code {
+    [CascadingParameter] SharedData SharedData { get; set; }
+}

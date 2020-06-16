@@ -1,0 +1,18 @@
+﻿<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    private string _selection = null;
+
+    public string[] Data { get; set; } = Array.Empty<string>();
+
+    public async Task Select(ChangeEventArgs selection)
+    {
+        _selection = selection.Value.ToString();
+        await Task.Delay(0);
+        Data = Enumerable.Range(0, 10).Select(i => $"{selection.Value} {i}").ToArray();
+    }
+}
